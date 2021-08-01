@@ -1,5 +1,5 @@
 ---
-title: Process Data
+title: Latent Semantic Analysis
 subtitle: Ayush Noori
 output:
   prettydoc::html_pretty:
@@ -22,7 +22,7 @@ library(purrr)
 library(magrittr)
 library(stringr)
 
-# plotting
+# data visualization
 library(ggplot2)
 
 # source utilities script
@@ -34,7 +34,8 @@ Directories are relative to the R project path.
 
 ```{r define-directores}
 
-ddir = "Data"
+ddir = file.path("Results", "2 - Parse Tweets")
+rdir = file.path("Results", "3 - Latent Semantic Analysis")
 
 ```
 
@@ -42,6 +43,16 @@ ddir = "Data"
 
 ```{r read-data}
 
-tweets = fread(file.path(ddir, "Hydrated Tweets.csv"))
+twt = readRDS(file.path(ddir, "Final Parsed Tweets.RDS"))
+
+```
+
+# Latent Semantic Analysis
+
+First, discard unneeded columns.
+
+```{r subset-columns}
+
+# twt = tweets[, .(id, full_text, display_text_range, created_at, user, source, in_reply_to_status_id, in_reply_to_user_id, in_reply_to_screen_name, is_quote_status, quoted_status_id, retweeted, favorited, retweet_count, favorite_count, possibly_sensitive, entities, coordinates, place)]
 
 ```

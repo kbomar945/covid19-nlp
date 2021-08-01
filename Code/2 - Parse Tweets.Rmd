@@ -1,0 +1,170 @@
+---
+title: Parse Tweets
+subtitle: Ayush Noori
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+    toc: yes
+editor_options: 
+  chunk_output_type: inline
+---
+
+# Dependencies
+
+Load requisite packages and define directories. Note that this script loads my personal utilities package, `ayushnoori/brainstorm`, which is available via GitHub.
+
+```{r load-packages, message=FALSE, warning=FALSE}
+
+# data manipulation
+library(data.table)
+library(purrr)
+library(magrittr)
+library(stringr)
+
+# parse JSON
+library(jsonlite)
+
+# parse HTML
+library(rvest)
+
+# convert IDs
+library(bit64)
+
+# source utilities script
+library(brainstorm)
+
+```
+
+Directories are relative to the R project path.
+
+```{r define-directores}
+
+ddir = "Data"
+rdir = file.path("Results", "2 - Parse Tweets")
+
+```
+
+# Read Data
+
+```{r read-data}
+
+# tweets = fread(file.path(ddir, "Hydrated Tweets.csv"), encoding = "UTF-8")
+
+```
+
+# Parse Data
+
+First, discard unneeded columns.
+
+```{r subset-columns}
+
+# twt = tweets[, .(id, full_text, display_text_range, created_at, user, source, in_reply_to_status_id, in_reply_to_user_id, in_reply_to_screen_name, is_quote_status, quoted_status_id, retweeted, favorited, retweet_count, favorite_count, possibly_sensitive, entities, coordinates, place)]
+
+```
+
+Write function to convert JSON lists to R objects, then subset.
+
+```{r convert-json}
+
+convert_json_user = function(val) {
+  if(val != "" | val == "null") {
+    return(parse_json(gsub("\"\"", "\"", val))[c("id_str", "name", "screen_name", "friends_count", "followers_count", "verified")])
+  } else return(NA) 
+}
+
+convert_json_entities = function(val) {
+  if(val != "" | val == "null") {
+    my_map = parse_json(gsub("\"\"", "\"", val))[c("hashtags", "user_mentions", "urls")]
+    my_map[["hashtags"]] = paste(map_chr(my_map$hashtags, ~.[["text"]]), collapse = ", ")
+    my_map[["user_mentions"]] = paste(map_chr(my_map$user_mentions, ~.[["screen_name"]]), collapse = ", ")
+    my_map[["urls"]] = paste(map_chr(my_map$urls, ~.[["url"]]), collapse = ", ")
+    return(my_map)
+  } else return(NA) 
+}
+
+convert_json_coordinates = function(val) {
+  if(val != "" & val != "null") {
+    my_map = parse_json(gsub("\"\"", "\"", val))[c("coordinates")]
+    my_map = unlist(my_map)
+    names(my_map) = c("x_coordinate", "y_coordinate")
+    return(my_map)
+  } else return(list(x_coordinate = NA, y_coordinate = NA)) 
+}
+
+convert_json_place = function(val) {
+  sel = c("id", "place_type", "name", "full_name", "country", "country_code")
+  if(val != "" & val != "null") {
+    my_map = parse_json(gsub("\"\"", "\"", val))[sel]
+    return(my_map)
+  } else {
+    blank_list = rep(NA, 6)
+    names(blank_list) = sel
+    return(blank_list) 
+  }
+}
+
+```
+
+Convert from JSON lists.
+
+```{r map-convert}
+
+# twt = twt %>%
+#   
+#   .[, c("user_id", "user_name", "user_screen_name", "user_friends", "user_followers", "user_verified") := map_dfr(user, convert_json_user)] %>%
+#   
+#   .[, c("hashtags", "user_mentions", "urls") := map_dfr(entities, convert_json_entities)] %>%
+#   
+#   .[, c("x_coordinate", "y_coordinate") := map_dfr(coordinates, convert_json_coordinates)] %>%
+#   
+#   .[, c("place_id", "place_type", "place_name", "place_full_name", "country", "country_code") := map_dfr(place, convert_json_place)]
+
+# save results
+# saveRDS(twt, file.path(rdir, "Raw Parsed Tweets.RDS"))
+twt = readRDS(file.path(rdir, "Raw Parsed Tweets.RDS"))
+
+```
+
+# Clean Data
+
+```{r clean-data}
+
+# remove parsed columns
+twt[, c("user", "entities", "coordinates", "place") := NULL]
+
+# get inner data from source tag
+clean_source = function(x) { read_html(x) %>% html_text() %>% return() }
+twt[, source := map_chr(source, clean_source)]
+
+# remove new line delimiters
+twt[, clean_text := gsub("\r\n", " ", full_text, fixed = T)]
+
+# function to remove URLs
+remove_url = function(text, urls) {
+  urls = unlist(strsplit(urls, ", "))
+  for(url in urls) text = gsub(url, "", text, fixed = T)
+  return(text)
+}
+
+# remove URLs
+twt[, clean_text := map2_chr(clean_text, urls, remove_url)]
+
+# convert IDs
+twt[, id := as.character.integer64(id)]
+
+```
+
+Convert to readable names.
+
+```{r readable-names}
+
+# convert to readable names
+readable = fread(file.path(ddir, "Readable Names.csv"))[order(Order)]
+setnames(twt, readable[, Original], readable[, Readable])
+setcolorder(twt, readable[, Readable])
+
+# save data
+saveRDS(twt, file.path(rdir, "Final Parsed Tweets.RDS"))
+
+```

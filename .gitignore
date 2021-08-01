@@ -3,3 +3,5 @@
 /Data/Hydrated Tweets.txt
 /Data/Hydrated Tweets.csv
 /Data/Summary Details/*
+/Results/*/*.csv
+/Results/*/*.RDS
