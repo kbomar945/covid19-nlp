@@ -1,0 +1,68 @@
+---
+title: "COVID-19 Tweets"
+subtitle: Ayush Noori
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: fill
+    theme:
+      bootswatch: minty
+      primary: "#9AC1AE"
+      navbar-bg: "#9AC1AE"
+    social: menu
+    source_code: embed
+---
+
+
+```{r global, include = FALSE}
+
+# load flexdashboard library
+library(flexdashboard)
+library(bslib)
+
+# load data in global chunk so it can be shared by all users of the dashboard
+library(data.table)
+library(purrr)
+library(magrittr)
+library(ggplot2)
+
+# read .RDS object
+twt = readRDS("Final Parsed Tweets.RDS")
+
+```
+
+
+Sidebar {.sidebar}
+=====================================
+
+Our project aims to characterize the public opinion of the COVID-19 pandemic by applying machine learning on COVID-related tweets. Rather than access the Twitter COVID-19 streaming endpoint directly, we use the pre-curated [USC JIMR Dataset](https://publichealth.jmir.org/2020/2/e19273/#ref24). After tweet hydration, we use natural language processing tools to derive aggregate features from our dataset.
+
+
+```{r select-input}
+
+
+```
+
+
+Page #1
+=====================================
+
+Row
+-----------------------------------------------------------------------
+
+### Value Box {.value-box}
+
+```{r value-box}
+
+valueBox(value = nrow(twt), icon = "fa-twitter", color = "#F4D5A4",
+           href = "https://www.twitter.com")
+
+```
+
+Row
+-----------------------------------------------------------------------
+
+### Template
+
+```{r template}
+

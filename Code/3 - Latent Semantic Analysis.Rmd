@@ -53,6 +53,9 @@ First, discard unneeded columns.
 
 ```{r subset-columns}
 
-
+p = ggplot(twt[RetweetCount > 1000], aes(x = RetweetCount)) +
+  geom_histogram(bins = 50, color = "black", fill = "#ED6A5A") +
+  labs(x = "Number of Retweets", y = "Count") +
+  theme_bw()
 
 ```
