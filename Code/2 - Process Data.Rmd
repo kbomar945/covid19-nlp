@@ -1,0 +1,47 @@
+---
+title: Process Data
+subtitle: Ayush Noori
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+    toc: yes
+editor_options: 
+  chunk_output_type: inline
+---
+
+# Dependencies
+
+Load requisite packages and define directories. Note that this script loads my personal utilities package, `ayushnoori/brainstorm`, which is available via GitHub.
+
+```{r load-packages, message=FALSE, warning=FALSE}
+
+# data manipulation
+library(data.table)
+library(purrr)
+library(magrittr)
+library(stringr)
+
+# plotting
+library(ggplot2)
+
+# source utilities script
+library(brainstorm)
+
+```
+
+Directories are relative to the R project path.
+
+```{r define-directores}
+
+ddir = "Data"
+
+```
+
+# Read Data
+
+```{r read-data}
+
+tweets = fread(file.path(ddir, "Hydrated Tweets.csv"))
+
+```
