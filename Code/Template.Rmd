@@ -1,5 +1,5 @@
 ---
-title: Latent Semantic Analysis
+title: Template
 subtitle: Ayush Noori
 output:
   prettydoc::html_pretty:
@@ -35,7 +35,6 @@ Directories are relative to the R project path.
 ```{r define-directores}
 
 ddir = file.path("Results", "2 - Parse Tweets")
-rdir = file.path("Results", "3 - Latent Semantic Analysis")
 
 ```
 
@@ -47,12 +46,12 @@ twt = readRDS(file.path(ddir, "Final Parsed Tweets.RDS"))
 
 ```
 
-# Latent Semantic Analysis
+# Template
 
-First, discard unneeded columns.
+Insert analysis below.
 
-```{r subset-columns}
+```{r template}
 
-
+# insert analysis here
 
 ```
