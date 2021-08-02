@@ -1,0 +1,60 @@
+---
+title: STM Visualization
+subtitle: Ayush Noori
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+    toc: yes
+editor_options: 
+  chunk_output_type: inline
+---
+
+# Dependencies
+
+Load requisite packages and define directories. Note that this script loads my personal utilities package, `ayushnoori/brainstorm`, which is available via GitHub.
+
+```{r load-packages, message=FALSE, warning=FALSE}
+
+# data manipulation
+library(data.table)
+library(purrr)
+library(magrittr)
+library(stringr)
+
+# structural topic modeling
+library(stm)
+
+# data visualization
+library(ggplot2)
+
+# source utilities script
+library(brainstorm)
+
+```
+
+Directories are relative to the R project path.
+
+```{r define-directores}
+
+ddir = file.path("Results", "3 - Semantic Analysis")
+rdir = file.path("Results", "4 - STM Visualization")
+
+```
+
+# Read Data
+
+```{r read-data}
+
+stm_fit = readRDS(file.path(ddir, "Structural Topic Model K56.RDS"))
+
+```
+
+Visualize interesting topics.
+
+```{r explore-topics}
+
+sel_topics = c(1, 3, 5, 6, 9, 11, 14, 21, 23, 32, 34, 41)
+
+
+```

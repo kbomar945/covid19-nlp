@@ -3,7 +3,6 @@ title: "COVID-19 NLP"
 subtitle: Ayush Noori
 output: 
   flexdashboard::flex_dashboard:
-    storyboard: true
     vertical_layout: fill
     theme:
       bootswatch: minty
@@ -43,7 +42,7 @@ twt = readRDS("Final Parsed Tweets.RDS")
 
 <link rel="shortcut icon" href="docs/virus-favicon.svg">
 
-About {data-orientation=rows}
+About {data-orientation=rows data-icon="fa-info-circle"}
 =====================================
 
 Row
@@ -133,6 +132,25 @@ ggplotly(favorited)
 ```
 
 
-Topics
+Topics {.storyboard data-icon="fa-file-alt"}
 =====================================
 
+### Topic 1
+
+```{r}
+
+```
+
+*** 
+
+Some commentary about Topic 1.
+
+### Topic 2
+
+```{r}
+
+```
+
+*** 
+
+Some commentary about Topic 2.
