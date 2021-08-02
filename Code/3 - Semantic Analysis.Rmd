@@ -1,0 +1,96 @@
+---
+title: Semantic Analysis
+subtitle: Ayush Noori
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
+    toc: yes
+editor_options: 
+  chunk_output_type: inline
+---
+
+# Dependencies
+
+Load requisite packages and define directories. Note that this script loads my personal utilities package, `ayushnoori/brainstorm`, which is available via GitHub.
+
+```{r load-packages, message=FALSE, warning=FALSE}
+
+# data manipulation
+library(data.table)
+library(purrr)
+library(magrittr)
+library(stringr)
+
+# structural topic modeling
+library(stm)
+
+# data visualization
+library(ggplot2)
+
+# source utilities script
+library(brainstorm)
+
+```
+
+Directories are relative to the R project path.
+
+```{r define-directores}
+
+ddir = file.path("Results", "2 - Parse Tweets")
+rdir = file.path("Results", "3 - Semantic Analysis")
+
+```
+
+# Read Data
+
+```{r read-data}
+
+twt = readRDS(file.path(ddir, "Final Parsed Tweets.RDS"))
+
+```
+
+# Structural Topic Modeling
+
+Read data using `stm::textProcessor()`, which is a wrapper around the `tm` package for text mining. For more details, please see the documentation [here](http://structuraltopicmodel.com).
+
+```{r process-text}
+
+# process text
+processed = textProcessor(twt$CleanText, metadata = as.data.frame(twt))
+# saveRDS(processed, file.path(rdir, "Processed Text.RDS"))
+# plotRemoved(processed$documents, lower.thresh = seq(1, 200, by = 100))
+
+# prepare documents
+out = prepDocuments(processed$documents, processed$vocab, processed$meta)
+# saveRDS(out, file.path(rdir, "Prepared Documents.RDS"))
+out = readRDS(file.path(rdir, "Prepared Documents.RDS"))
+
+# Removing 333045 of 451964 terms (333045 of 7150863 tokens) due to frequency 
+# Removing 770 Documents with No Words 
+# Your corpus now has 510174 documents, 118919 terms and 6817818 tokens.
+
+```
+
+Now, estimate a structural topic model using semi-collapsed variational EM. Since the initialization method is `Spectral`, we set the number of topics `K` to be `0` to use the algorithm of Lee and Mimno (2014) to estimate the number of topics.
+
+```{r estimate-stm}
+
+# stm_fit = stm(documents = out$documents, vocab = out$vocab, data = out$meta,
+#               K = 0, init.type="Spectral", seed = 1234, max.em.its = 100)
+
+stm_fit = stm(documents = out$documents, vocab = out$vocab, data = out$meta,
+              K = 10, init.type="Spectral", seed = 1234, max.em.its = 100)
+
+saveRDS(stm_fit, file.path(rdir, "Structural Topic Model K10.RDS"))
+
+```
+
+Visualize interesting topics.
+
+```{r explore-topics}
+
+sel_topics = c(1, 3, 5, 6, 9, 11, 14, 21, 23, 32, 34, 41)
+
+
+```

@@ -1,16 +1,17 @@
 ---
-title: "COVID-19 Tweets"
+title: "COVID-19 NLP"
 subtitle: Ayush Noori
 output: 
   flexdashboard::flex_dashboard:
-    orientation: rows
+    storyboard: true
     vertical_layout: fill
     theme:
       bootswatch: minty
-      primary: "#9AC1AE"
-      navbar-bg: "#9AC1AE"
+      primary: "#1d3557"
+      secondary: "#e63946"
+      navbar-bg: "#1d3557"
     social: menu
-    source_code: embed
+    source_code: https://github.com/ayushnoori/covid19-nlp
 ---
 
 
@@ -25,44 +26,113 @@ library(data.table)
 library(purrr)
 library(magrittr)
 library(ggplot2)
+library(stringr)
+library(plotly)
+
+# for icons
+library(htmltools)
+library(fontawesome)
+htmltools::tagList(fontawesome::fa_html_dependency())
 
 # read .RDS object
 twt = readRDS("Final Parsed Tweets.RDS")
+# twt = readRDS("docs/Final Parsed Tweets.RDS")
+# times = as.ITime(word(twt$Date, 4))
 
 ```
 
+<link rel="shortcut icon" href="docs/virus-favicon.svg">
 
-Sidebar {.sidebar}
-=====================================
-
-Our project aims to characterize the public opinion of the COVID-19 pandemic by applying machine learning on COVID-related tweets. Rather than access the Twitter COVID-19 streaming endpoint directly, we use the pre-curated [USC JIMR Dataset](https://publichealth.jmir.org/2020/2/e19273/#ref24). After tweet hydration, we use natural language processing tools to derive aggregate features from our dataset.
-
-
-```{r select-input}
-
-
-```
-
-
-Page #1
+About {data-orientation=rows}
 =====================================
 
 Row
 -----------------------------------------------------------------------
 
-### Value Box {.value-box}
+### Original Tweet Count {.value-box}
 
-```{r value-box}
+```{r original-count}
 
-valueBox(value = nrow(twt), icon = "fa-twitter", color = "#F4D5A4",
+valueBox(value = "2,996,979", icon = "fa-twitter", color = "#DFF2F2",
            href = "https://www.twitter.com")
 
 ```
 
-Row
+### Final Tweet Count {.value-box}
+
+```{r final-count}
+
+valueBox(value = "511,675", icon = "fa-filter", color = "#B8D0E0")
+
+```
+
+### Date Selected {.value-box}
+
+```{r date-selected}
+
+valueBox(value = "July 1st, 2021", icon = "fa-calendar", color = "#95B2DC")
+
+```
+
+Row {data-height=350}
 -----------------------------------------------------------------------
 
-### Template
+### Methodology
 
-```{r template}
+Our project aimed to characterize the public opinion of the COVID-19 pandemic by applying machine learning on COVID-related tweets. Our methodology is detailed below:
+
+1. We queried the pre-curated dataset of COVID-related tweets published by [Chen et al.](https://doi.org/10.2196/19273) in *JMIR* for those tweets posted on July 1st, 2021. A total of 2,996,979 tweets were identified.
+
+2. We filtered this initial dataset for tweets which were written in the English language, and which were *not* retweets (i.e., were original content). The resulting 540,642 tweets were hydrated in Python using the Twitter API.
+
+3. The 511,675 successfully hydrated tweets were parsed from JSON/HTML and cleaned in R, followed by feature extraction (e.g., hashtags, URLs, replies, retweets, location, etc.). 
+
+4. Finally, we used natural language processing tools such as structural topic modeling to derive aggregate features from our dataset.
+
+Analyses were performed in Python and R. All code is available via our [GitHub repository](https://github.com/ayushnoori/covid19-nlp).
+
+Row {data-height=650}
+-----------------------------------------------------------------------
+
+### Retweeted Tweets
+
+```{r retweeted-plot}
+
+retweeted = ggplot(twt[RetweetCount != 0], aes(x = RetweetCount, fill = UserVerified)) +
+  geom_histogram(position = "stack", bins = 20, color = "black") +
+  scale_fill_manual(values = c("#C3CAD5", "#e63946")) +
+  scale_x_log10() +
+  labs(x = "Number of Retweets", y = "Count", fill = "Verified?") +
+  theme_bw() +
+  theme(axis.title.x = element_text(face = "bold"),
+        axis.title.y = element_text(face = "bold"),
+        legend.title = element_text(face = "bold"),
+        legend.position = "bottom")
+
+ggplotly(retweeted)
+
+```
+
+### Favorited Tweets
+
+```{r favorited-plot}
+
+favorited = ggplot(twt[FavoriteCount != 0], aes(x = FavoriteCount, fill = UserVerified)) +
+  geom_histogram(position = "stack", bins = 20, color = "black") +
+  scale_fill_manual(values = c("#C3CAD5", "#e63946")) +
+  scale_x_log10() +
+  labs(x = "Number of Times Favorited", y = "Count", fill = "Verified?") +
+  theme_bw() +
+  theme(axis.title.x = element_text(face = "bold"),
+        axis.title.y = element_text(face = "bold"),
+        legend.title = element_text(face = "bold"),
+        legend.position = "bottom")
+
+ggplotly(favorited)
+
+```
+
+
+Topics
+=====================================
 
