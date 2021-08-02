@@ -150,6 +150,7 @@ Topics {.storyboard data-icon="fa-file-alt"}
 ```{r}
 
 htmltools::includeHTML("topics/topic-3.html")
+htmltools::includeScript("twitter-widgets.js")
 
 ```
 
@@ -233,4 +234,4 @@ Row
 
 4. Roberts, M., Stewart, B., & Tingley, D. (2016). "Navigating the Local Modes of Big Data: The Case of Topic Models. In Data Analytics in Social Science, Government, and Industry." New York: Cambridge University Press.
 
-5. Lee, M. and Mimno, D. (2014) "Low-dimensional Embeddings for Interpretable Anchor-based Topic Inference." In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP), 1319–1328.
+5. Lee, M. and Mimno, D. (2014) "Low-Dimensional Embeddings for Interpretable Anchor-based Topic Inference." In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP), 1319–1328.

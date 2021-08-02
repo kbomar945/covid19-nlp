@@ -17,6 +17,7 @@ blockquote.twitter-tweet {
     margin: 10px 5px;
     /* padding: 0 16px 16px 16px; */
     max-width: 468px;
+    vertical-align: top;
  }
   
 blockquote.twitter-tweet p {
