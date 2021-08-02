@@ -74,22 +74,31 @@ valueBox(value = "July 1st, 2021", icon = "fa-calendar", color = "#95B2DC")
 
 ```
 
-Row {data-height=350}
+Row {data-height=300}
 -----------------------------------------------------------------------
 
-### Methodology
+### Methodology {data-width=600}
 
 Our project aimed to characterize the public opinion of the COVID-19 pandemic by applying machine learning on COVID-related tweets. Our methodology is detailed below:
 
 1. We queried the pre-curated dataset of COVID-related tweets published by [Chen et al.](https://doi.org/10.2196/19273) in *JMIR* for those tweets posted on July 1st, 2021. A total of 2,996,979 tweets were identified.
 
-2. We filtered this initial dataset for tweets which were written in the English language, and which were *not* retweets (i.e., were original content). The resulting 540,642 tweets were hydrated in Python using the Twitter API.
+2. We filtered this initial dataset for tweets which were written in the English language and which were *not* retweets (i.e., were original content). The resulting 540,642 tweets were hydrated in Python using the Twitter API.
 
 3. The 511,675 successfully hydrated tweets were parsed from JSON/HTML and cleaned in R, followed by feature extraction (e.g., hashtags, URLs, replies, retweets, location, etc.). 
 
-4. Finally, we used natural language processing tools such as structural topic modeling to derive aggregate features from our dataset.
+4. Finally, we used natural language processing tools including structural topic modeling to derive aggregate features from our dataset.
 
 Analyses were performed in Python and R. All code is available via our [GitHub repository](https://github.com/ayushnoori/covid19-nlp).
+
+### Topic Modeling {data-width=400}
+
+Tweet preprocessing was performed using a wrapper to the `tm` package. Briefly, extra white space was stripped; numbers, stop words, punctuation, and low-frequency terms were removed; and words were stemmed using snowball stemmers.
+
+After constructing the tweet term matrix and the vocabulary index of words in the corpus, we then used the [`stm` package](http://www.structuraltopicmodel.com/) to estimate a structural topic model (STM) using semi-collapsed variational EM. STMs permit the study of interaction betweeen tweet-level covariates (from feature extraction) and topical prevalence and/or content. We use spectral initialization and applied the algorithm of Lee and Mimno (2014) to estimate the number of topics. A maximum of 100 EM iterations were permitted; if convergence was not met at this point, the model was discarded.
+
+The resulting topics were examined, and topics of interest were selected for further analysis. For each topic, top tweets ranked by the MAP estimate of the topic's theta value (which captures the modal estimate of the proportion of word tokens assigned to the topic under the model) were identified. Representative tweets are displayed [here](#topics).
+
 
 Row {data-height=650}
 -----------------------------------------------------------------------
@@ -136,7 +145,7 @@ ggplotly(favorited)
 Topics {.storyboard data-icon="fa-file-alt"}
 =====================================
 
-### Topic 3: mask, wear, still, social, distanc
+### Topic 3: mask, wear, still, social, distanc {data-commentary-width=400}
 
 ```{r}
 
@@ -149,7 +158,7 @@ htmltools::includeHTML("topics/topic-3.html")
 Topic 3 pertains to masking and social distancing. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
 
 
-### Topic 5: vaccin, avail, dose, appoint, sign
+### Topic 5: vaccin, avail, dose, appoint, sign {data-commentary-width=400}
 
 ```{r}
 
@@ -162,7 +171,7 @@ htmltools::includeHTML("topics/topic-5.html")
 Topic 5 pertains to vaccination; specifically, vaccine scheduling and availability. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
 
 
-### Topic 9: trump, covid, american, vote, biden 
+### Topic 9: trump, covid, american, vote, biden {data-commentary-width=400}
 
 ```{r}
 
@@ -175,7 +184,7 @@ htmltools::includeHTML("topics/topic-9.html")
 Topic 9 contains tweets discussing politics and COVID-19. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
 
 
-### Topic 14: doctor, thank, pandem, doctorsday, covid 
+### Topic 14: doctor, thank, pandem, doctorsday, covid {data-commentary-width=400}
 
 ```{r}
 
@@ -188,7 +197,7 @@ htmltools::includeHTML("topics/topic-14.html")
 Topic 14 contains tweets expressing gratitude to doctors and frontline healthcare workers. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
 
 
-### Topic 34: variant, peopl, vaccin, delta, covid
+### Topic 34: variant, peopl, vaccin, delta, covid {data-commentary-width=400}
 
 ```{r}
 
@@ -199,3 +208,29 @@ htmltools::includeHTML("topics/topic-34.html")
 *** 
 
 Topic 34 pertains to the Delta COVID-19 variant. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
+
+
+References {data-orientation=rows data-icon="fa-book"}
+=====================================
+
+Sidebar {.sidebar}
+-----------------------------------------------------------------------
+
+This project was developed for the [Harvard Data Analytics Group (HDAG)](https://www.harvardanalytics.org/) Data Science Fellowship.
+
+We thank the developers of the packages used. All tweets displayed on this website have not been filtered for objectionable content. Presentation here does not imply endorsement.
+
+Row
+-----------------------------------------------------------------------
+
+### References
+
+1. Roberts, M., Stewart, B., Tingley, D., and Airoldi, E. (2013) "The structural topic model and applied social science." In Advances in Neural Information Processing Systems Workshop on Topic Models: Computation, Application, and Evaluation.
+
+2. Roberts M., Stewart, B. and Airoldi, E. (2016) "A model of text for experimentation in the social sciences" Journal of the American Statistical Association.
+
+3. Roberts, M., Stewart, B., Tingley, D., Lucas, C., Leder-Luis, J., Gadarian, S., Albertson, B., et al. (2014). Structural topic models for open ended survey responses. American Journal of Political Science, 58(4), 1064-1082.
+
+4. Roberts, M., Stewart, B., & Tingley, D. (2016). "Navigating the Local Modes of Big Data: The Case of Topic Models. In Data Analytics in Social Science, Government, and Industry." New York: Cambridge University Press.
+
+5. Lee, M. and Mimno, D. (2014) "Low-dimensional Embeddings for Interpretable Anchor-based Topic Inference." In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP), 1319–1328.

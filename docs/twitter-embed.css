@@ -1,3 +1,8 @@
+.sbframe-commentary > p {
+    font-size: 18px;
+    line-height: 30px;
+}
+
 blockquote.twitter-tweet {
     display: inline-block;
     font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
@@ -19,6 +24,7 @@ blockquote.twitter-tweet p {
     font-weight: normal;
     line-height: 30px;
     padding: 16px 16px 0px 16px;
+    word-break: break-word;
 }
   
 blockquote.twitter-tweet a {
