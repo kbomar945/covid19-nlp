@@ -37,6 +37,7 @@ Directories are relative to the R project path.
 
 ```{r define-directores}
 
+bdir = file.path("Results", "2 - Parse Tweets")
 ddir = file.path("Results", "3 - Semantic Analysis")
 rdir = file.path("Results", "4 - STM Visualization")
 
@@ -46,15 +47,45 @@ rdir = file.path("Results", "4 - STM Visualization")
 
 ```{r read-data}
 
+twt = readRDS(file.path(bdir, "Final Parsed Tweets.RDS"))
+processed = readRDS(file.path(ddir, "Processed Text.RDS"))
+out = readRDS(file.path(ddir, "Prepared Documents.RDS"))
 stm_fit = readRDS(file.path(ddir, "Structural Topic Model K56.RDS"))
 
 ```
 
-Visualize interesting topics.
+Visualize interesting topics and find representative documents.
 
-```{r explore-topics}
+```{r representative-documents}
 
-sel_topics = c(1, 3, 5, 6, 9, 11, 14, 21, 23, 32, 34, 41)
+sel_topics = c(3, 5, 9, 11, 14, 21, 23, 32, 34, 41)
 
+rep_docs = function(topic_n) {
+  
+  thoughts_n = findThoughts(stm_fit, texts = out$meta$CleanText, n = 100, topics = topic_n)
+  thoughts_df = data.frame(topic_n, thoughts_n$index, thoughts_n$docs)
+  colnames(thoughts_df) = c("Topic", "Index", "Text")
+  thoughts_df = cbind(thoughts_df, out$meta[thoughts_df$Index, ])
+  
+}
+
+```
+
+Map function over interesting topics to get representative documents.
+
+```{r map-representative}
+
+rep_list = map_dfr(sel_topics, rep_docs)
+setDT(rep_list)
+
+rep_list %>%
+  .[, ID := bit64::as.character.integer64(ID)] %>%
+  .[, c("FullText", "CleanText") := NULL] %>%
+  .[, TweetURL := paste0("https://twitter.com/", UserScreenName, "/status/", ID)] %>%
+  setcolorder("TweetURL")
+
+saveRDS(rep_list, file.path(rdir, "Representative Tweets.RDS"))
+write_excel(rep_list, file.path(rdir, "Representative Tweets.xlsx"),
+            sheet = "Representative Tweets", overwrite = F)
 
 ```

@@ -4,6 +4,7 @@ subtitle: Ayush Noori
 output: 
   flexdashboard::flex_dashboard:
     vertical_layout: fill
+    css: twitter-embed.css
     theme:
       bootswatch: minty
       primary: "#1d3557"
@@ -135,22 +136,66 @@ ggplotly(favorited)
 Topics {.storyboard data-icon="fa-file-alt"}
 =====================================
 
-### Topic 1
+### Topic 3: mask, wear, still, social, distanc
 
 ```{r}
+
+htmltools::includeHTML("topics/topic-3.html")
 
 ```
 
 *** 
 
-Some commentary about Topic 1.
+Topic 3 pertains to masking and social distancing. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
 
-### Topic 2
+
+### Topic 5: vaccin, avail, dose, appoint, sign
 
 ```{r}
+
+htmltools::includeHTML("topics/topic-5.html")
 
 ```
 
 *** 
 
-Some commentary about Topic 2.
+Topic 5 pertains to vaccination; specifically, vaccine scheduling and availability. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
+
+
+### Topic 9: trump, covid, american, vote, biden 
+
+```{r}
+
+htmltools::includeHTML("topics/topic-9.html")
+
+```
+
+*** 
+
+Topic 9 contains tweets discussing politics and COVID-19. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
+
+
+### Topic 14: doctor, thank, pandem, doctorsday, covid 
+
+```{r}
+
+htmltools::includeHTML("topics/topic-14.html")
+
+```
+
+*** 
+
+Topic 14 contains tweets expressing gratitude to doctors and frontline healthcare workers. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
+
+
+### Topic 34: variant, peopl, vaccin, delta, covid
+
+```{r}
+
+htmltools::includeHTML("topics/topic-34.html")
+
+```
+
+*** 
+
+Topic 34 pertains to the Delta COVID-19 variant. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
