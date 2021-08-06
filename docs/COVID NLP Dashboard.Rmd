@@ -160,8 +160,11 @@ Topic 3 pertains to **masking and social distancing**. Representative tweets are
 Word profiles for Topic 3 are reported below based on several metrics, including highest probability, FREX (weighted by overall frequency and topic exclusivity), lift (weighted by dividing by word frequency in other topics), and score (log frequency of the word in the topic divided by the log frequency of the word in other topics).
 
 **Highest Probability:** mask, wear, still, social, distanc, peopl, keep 
+
 **FREX:** thomaskain, wear, mask, swampwitchleigh, taal, sassykadik, mask… 
+
 **Lift:** risingradio, sosupersam, buymapa, sbxatinbentesaryo, thatid, markzli, maskimo 
+
 **Score:** mask, wear, still, distanc, social, mandat, indoor 
 
 
@@ -180,8 +183,11 @@ Topic 5 pertains to **vaccination; specifically, vaccine scheduling and availabi
 Word profiles for Topic 5 are reported below based on several metrics, including highest probability, FREX (weighted by overall frequency and topic exclusivity), lift (weighted by dividing by word frequency in other topics), and score (log frequency of the word in the topic divided by the log frequency of the word in other topics).
 
 **Highest Probability:** vaccin, avail, sign, appoint, near, dose, covid- 
+
 **FREX:** walgreensduan, walgreen, zip, appoint, cvs, berwyn, skoki 
+
 **Lift:** 𝐔𝐏𝐃𝐀𝐓𝐄, 𝐕𝐚𝐜𝐜𝐢𝐧𝐚𝐭𝐢𝐨𝐧, ઉપર, વર્ષ, વર્ષથી, activenland, alnwickgazett
+
 **Score:** appoint, avail, dose, sign, vaccin, near, jul 
 
 
@@ -200,8 +206,11 @@ Topic 9 contains tweets discussing **politics and COVID-19**. Representative twe
 Word profiles for Topic 9 are reported below based on several metrics, including highest probability, FREX (weighted by overall frequency and topic exclusivity), lift (weighted by dividing by word frequency in other topics), and score (log frequency of the word in the topic divided by the log frequency of the word in other topics).
 
 **Highest Probability:** trump, american, money, biden, vote, presid, cost 
+
 **FREX:** capitol, deficit, tax, republican, incit, cost, infrastructur
+
 **Lift:** andymoor, cjuliasm, dinosaurtrix, gonnaeeeno, scotsmistt, deathstrump, gridsinfrastructur 
+
 **Score:** trump, vote, american, biden, tax, cost, republican 
 
 
@@ -220,8 +229,11 @@ Topic 14 contains tweets **expressing gratitude to doctors and frontline healthc
 Word profiles for Topic 14 are reported below based on several metrics, including highest probability, FREX (weighted by overall frequency and topic exclusivity), lift (weighted by dividing by word frequency in other topics), and score (log frequency of the word in the topic divided by the log frequency of the word in other topics).
 
 **Highest Probability:** doctor, thank, pandem, doctorsday, medic, fight, day 
+
 **FREX:** fmgereduceto, help🙏, aashiwini, “medicines💊, fmge, doctordoctor, salutedoctor 
+
 **Lift:** ‘mankind’, “medicines💊, 𝐷𝑎𝑦👨‍⚕️🥰💓, 𝐷𝑜𝑐𝑡𝑜𝑟𝑠, 𝐻𝑎𝑝𝑝𝑦, 𝗗𝗼𝗰𝘁𝗼𝗿’𝘀, 👍drharshvardhan  
+
 **Score:** doctor, doctorsday, nationaldoctorsday, thank, salut, happydoctorsday, fight
 
 
@@ -240,8 +252,11 @@ Topic 34 pertains to the **COVID-19 variants, including and especially the Delta
 Word profiles for Topic 34 are reported below based on several metrics, including highest probability, FREX (weighted by overall frequency and topic exclusivity), lift (weighted by dividing by word frequency in other topics), and score (log frequency of the word in the topic divided by the log frequency of the word in other topics).
 
 **Highest Probability:** variant, peopl, delta, vaccin, risk, cdc, covid 
+
 **FREX:** hypertransmiss, walenski, cnet, edyong, unvaccin, trvrb, delta 
+
 **Lift:** ampquotthi, youampquot, shelbymccowan, bannedword, cdcword, doubleplusgoodspeak, trumphasdementia 
+
 **Score:** variant, delta, cdc, risk, vaccin, peopl, unvaccin 
 
 
