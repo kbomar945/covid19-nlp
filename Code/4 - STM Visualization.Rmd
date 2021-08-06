@@ -58,7 +58,7 @@ Visualize interesting topics and find representative documents.
 
 ```{r representative-documents}
 
-sel_topics = c(3, 5, 9, 11, 14, 21, 23, 32, 34, 41)
+sel_topics = c(3, 5, 9, 11, 14, 21, 23, 32, 34, 37, 41, 55)
 
 rep_docs = function(topic_n) {
   
@@ -87,5 +87,40 @@ rep_list %>%
 saveRDS(rep_list, file.path(rdir, "Representative Tweets.RDS"))
 write_excel(rep_list, file.path(rdir, "Representative Tweets.xlsx"),
             sheet = "Representative Tweets", overwrite = F)
+
+```
+
+Plot topics summary.
+
+```{r plot-topics}
+
+pdf(file.path(rdir, "Top Topics.pdf"), width = 16, height = 16)
+plot(stm_fit, type = "summary", xlim = c(0, 0.1))
+dev.off()
+
+# stm_corr = topicCorr(stm_fit)
+# plot(stm_corr)
+
+```
+
+Check correlation with followers and friends.
+
+```{r check-correlation}
+
+prep = estimateEffect(c(3, 5, 9, 14, 34) ~ UserFollowers + UserFriends, stm_fit, meta = out$meta, uncertainty = "None")
+summary(prep)
+
+prep_followers = estimateEffect(c(3, 5, 9, 14, 34) ~ s(UserFollowers), stm_fit, meta = out$meta, uncertainty = "None")
+
+prep_friends = estimateEffect(c(3, 5, 9, 14, 34) ~ s(UserFriends), stm_fit, meta = out$meta, uncertainty = "None")
+
+#labeltype = "prob", model = stm_fit, 
+pdf(file.path(rdir, "Followers Relationship.pdf"), width = 8, height = 8)
+plot(prep_followers, "UserFollowers", method = "continuous", topics = c(3, 5, 9, 14, 34), xlab = "Followers", ci.level = NA, ylim = c(-0.07, 0.1), xlim = c(1e07/2, 6e07), linecol = c("#70A2FF", "#E07A5F", "#3D405B", "#67A286", "#EEBC6D"))
+dev.off()
+
+pdf(file.path(rdir, "Friends Relationship.pdf"), width = 8, height = 8)
+plot(prep_friends, "UserFriends", method = "continuous", topics = c(3, 5, 9, 14, 34), xlab = "Friends", ci.level = NA, ylim = c(-0.2, 0.2), xlim = c(100000, 1900000), linecol = c("#70A2FF", "#E07A5F", "#3D405B", "#67A286", "#EEBC6D"))
+dev.off()
 
 ```

@@ -145,21 +145,27 @@ ggplotly(favorited)
 Topics {.storyboard data-icon="fa-file-alt"}
 =====================================
 
-### Topic 3: mask, wear, still, social, distanc {data-commentary-width=400}
+### Topic 3: mask, wear, still, social, distanc, peopl, keep {data-commentary-width=400}
 
 ```{r}
 
 htmltools::includeHTML("topics/topic-3.html")
-htmltools::includeScript("twitter-widgets.js")
 
 ```
 
 *** 
 
-Topic 3 pertains to masking and social distancing. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
+Topic 3 pertains to **masking and social distancing**. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
+
+Word profiles for Topic 3 are reported below based on several metrics, including highest probability, FREX (weighted by overall frequency and topic exclusivity), lift (weighted by dividing by word frequency in other topics), and score (log frequency of the word in the topic divided by the log frequency of the word in other topics).
+
+**Highest Probability:** mask, wear, still, social, distanc, peopl, keep 
+**FREX:** thomaskain, wear, mask, swampwitchleigh, taal, sassykadik, mask… 
+**Lift:** risingradio, sosupersam, buymapa, sbxatinbentesaryo, thatid, markzli, maskimo 
+**Score:** mask, wear, still, distanc, social, mandat, indoor 
 
 
-### Topic 5: vaccin, avail, dose, appoint, sign {data-commentary-width=400}
+### Topic 5: vaccin, avail, sign, appoint, near, dose, covid- {data-commentary-width=400}
 
 ```{r}
 
@@ -169,10 +175,17 @@ htmltools::includeHTML("topics/topic-5.html")
 
 *** 
 
-Topic 5 pertains to vaccination; specifically, vaccine scheduling and availability. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
+Topic 5 pertains to **vaccination; specifically, vaccine scheduling and availability**. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
+
+Word profiles for Topic 5 are reported below based on several metrics, including highest probability, FREX (weighted by overall frequency and topic exclusivity), lift (weighted by dividing by word frequency in other topics), and score (log frequency of the word in the topic divided by the log frequency of the word in other topics).
+
+**Highest Probability:** vaccin, avail, sign, appoint, near, dose, covid- 
+**FREX:** walgreensduan, walgreen, zip, appoint, cvs, berwyn, skoki 
+**Lift:** 𝐔𝐏𝐃𝐀𝐓𝐄, 𝐕𝐚𝐜𝐜𝐢𝐧𝐚𝐭𝐢𝐨𝐧, ઉપર, વર્ષ, વર્ષથી, activenland, alnwickgazett
+**Score:** appoint, avail, dose, sign, vaccin, near, jul 
 
 
-### Topic 9: trump, covid, american, vote, biden {data-commentary-width=400}
+### Topic 9: trump, american, money, biden, vote, presid, cost {data-commentary-width=400}
 
 ```{r}
 
@@ -182,10 +195,17 @@ htmltools::includeHTML("topics/topic-9.html")
 
 *** 
 
-Topic 9 contains tweets discussing politics and COVID-19. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
+Topic 9 contains tweets discussing **politics and COVID-19**. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
+
+Word profiles for Topic 9 are reported below based on several metrics, including highest probability, FREX (weighted by overall frequency and topic exclusivity), lift (weighted by dividing by word frequency in other topics), and score (log frequency of the word in the topic divided by the log frequency of the word in other topics).
+
+**Highest Probability:** trump, american, money, biden, vote, presid, cost 
+**FREX:** capitol, deficit, tax, republican, incit, cost, infrastructur
+**Lift:** andymoor, cjuliasm, dinosaurtrix, gonnaeeeno, scotsmistt, deathstrump, gridsinfrastructur 
+**Score:** trump, vote, american, biden, tax, cost, republican 
 
 
-### Topic 14: doctor, thank, pandem, doctorsday, covid {data-commentary-width=400}
+### Topic 14: doctor, thank, pandem, doctorsday, medic, fight, day {data-commentary-width=400}
 
 ```{r}
 
@@ -195,10 +215,17 @@ htmltools::includeHTML("topics/topic-14.html")
 
 *** 
 
-Topic 14 contains tweets expressing gratitude to doctors and frontline healthcare workers. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
+Topic 14 contains tweets **expressing gratitude to doctors and frontline healthcare workers**. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
+
+Word profiles for Topic 14 are reported below based on several metrics, including highest probability, FREX (weighted by overall frequency and topic exclusivity), lift (weighted by dividing by word frequency in other topics), and score (log frequency of the word in the topic divided by the log frequency of the word in other topics).
+
+**Highest Probability:** doctor, thank, pandem, doctorsday, medic, fight, day 
+**FREX:** fmgereduceto, help🙏, aashiwini, “medicines💊, fmge, doctordoctor, salutedoctor 
+**Lift:** ‘mankind’, “medicines💊, 𝐷𝑎𝑦👨‍⚕️🥰💓, 𝐷𝑜𝑐𝑡𝑜𝑟𝑠, 𝐻𝑎𝑝𝑝𝑦, 𝗗𝗼𝗰𝘁𝗼𝗿’𝘀, 👍drharshvardhan  
+**Score:** doctor, doctorsday, nationaldoctorsday, thank, salut, happydoctorsday, fight
 
 
-### Topic 34: variant, peopl, vaccin, delta, covid {data-commentary-width=400}
+### Topic 34: variant, peopl, delta, vaccin, risk, cdc, covid {data-commentary-width=400}
 
 ```{r}
 
@@ -208,7 +235,14 @@ htmltools::includeHTML("topics/topic-34.html")
 
 *** 
 
-Topic 34 pertains to the Delta COVID-19 variant. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
+Topic 34 pertains to the **COVID-19 variants, including and especially the Delta variant**. Representative tweets are displayed here. Please note that tweets have not been filtered for objectionable content, and presentation here does not imply endorsement.
+
+Word profiles for Topic 34 are reported below based on several metrics, including highest probability, FREX (weighted by overall frequency and topic exclusivity), lift (weighted by dividing by word frequency in other topics), and score (log frequency of the word in the topic divided by the log frequency of the word in other topics).
+
+**Highest Probability:** variant, peopl, delta, vaccin, risk, cdc, covid 
+**FREX:** hypertransmiss, walenski, cnet, edyong, unvaccin, trvrb, delta 
+**Lift:** ampquotthi, youampquot, shelbymccowan, bannedword, cdcword, doubleplusgoodspeak, trumphasdementia 
+**Score:** variant, delta, cdc, risk, vaccin, peopl, unvaccin 
 
 
 References {data-orientation=rows data-icon="fa-book"}
@@ -235,3 +269,5 @@ Row
 4. Roberts, M., Stewart, B., & Tingley, D. (2016). "Navigating the Local Modes of Big Data: The Case of Topic Models. In Data Analytics in Social Science, Government, and Industry." New York: Cambridge University Press.
 
 5. Lee, M. and Mimno, D. (2014) "Low-Dimensional Embeddings for Interpretable Anchor-based Topic Inference." In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP), 1319–1328.
+
+6. Taddy, M. (2013). "Multinomial Inverse Regression for Text Analysis." Journal of the American Statistical Association, 108(503), 755–770.
