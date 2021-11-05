@@ -1,4 +1,5 @@
 # Natural Language Processing on COVID-19 Twitter Data
+### By Omar Wahby, Ayush Noori, and Ethan Fang
 ### *HDAG Data Science Fellowship*
 
 Our project aimed to characterize the public opinion of the COVID-19 pandemic by applying machine learning on COVID-related tweets. Our methodology is detailed below:
